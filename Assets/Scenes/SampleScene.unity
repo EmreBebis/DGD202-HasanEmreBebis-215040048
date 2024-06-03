@@ -259,7 +259,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1493754044}
   m_Father: {fileID: 2034653598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &376237925
@@ -378,7 +379,7 @@ GameObject:
   - component: {fileID: 673511412}
   - component: {fileID: 673511411}
   - component: {fileID: 673511410}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: cubbuh2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +729,7 @@ GameObject:
   - component: {fileID: 881169452}
   - component: {fileID: 881169451}
   - component: {fileID: 881169450}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: cubbuh2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,12 +1270,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493754043}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2034653598}
+  m_Father: {fileID: 376237924}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688126559
 GameObject:
@@ -1498,7 +1499,7 @@ GameObject:
   - component: {fileID: 1740362795}
   - component: {fileID: 1740362794}
   - component: {fileID: 1740362793}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: cubbuh2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1708,7 +1709,7 @@ GameObject:
   - component: {fileID: 1964758670}
   - component: {fileID: 1964758669}
   - component: {fileID: 1964758668}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: cubbuh2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1942,7 +1943,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 376237924}
-  - {fileID: 1493754044}
   - {fileID: 636014684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1992,7 +1992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   sprintSpeed: 10
-  slideSpeed: 30
+  slideSpeed: 20
   wallrunSpeed: 8.5
   climbSpeed: 3
   vaultSpeed: 0
@@ -2059,13 +2059,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
   wallRunForce: 200
-  wallJumpUpForce: 7
-  wallJumpSideForce: 12
+  wallJumpUpForce: 5
+  wallJumpSideForce: 10
   wallClimbSpeed: 3
   maxWallRunTime: 1.5
   jumpKey: 32
@@ -2073,7 +2073,7 @@ MonoBehaviour:
   downwardsRunKey: 306
   wallCheckDistance: 1
   minJumpHeight: 1
-  exitWallTime: 1
+  exitWallTime: 0.2
   useGravity: 0
   gravityCounterForce: 100
   orientation: {fileID: 1493754044}
@@ -2120,43 +2120,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eef473e75ff71149bb1cf65c4fbeced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 0}
-  rb: {fileID: 0}
-  pm: {fileID: 0}
+  orientation: {fileID: 1493754044}
+  rb: {fileID: 2034653599}
+  pm: {fileID: 2034653600}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   climbSpeed: 3
   maxClimbTime: 0.75
   climbJumpUpForce: 15
   climbJumpBackForce: 15
   jumpKey: 32
-  climbJumps: 0
-  detectionLength: 0
-  sphereCastRadius: 0
+  climbJumps: 1
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
   maxWallLookAngle: 30
-  minWallNormalAngleChange: 0
+  minWallNormalAngleChange: 20
   exitingWall: 0
-  exitWallTime: 0
-  cam: {fileID: 0}
-  moveToLedgeSpeed: 0
-  ledgeJumpForwardForce: 0
-  ledgeJumpUpForce: 0
-  maxLedgeJumpUpSpeed: 0
-  maxLedgeGrabDistance: 0
-  minTimeOnLedge: 0
-  ledgeDetectionLength: 0
-  ledgeSphereCastRadius: 0
+  exitWallTime: 0.2
+  cam: {fileID: 1493754044}
+  moveToLedgeSpeed: 5
+  ledgeJumpForwardForce: 8
+  ledgeJumpUpForce: 6
+  maxLedgeJumpUpSpeed: 10
+  maxLedgeGrabDistance: 2
+  minTimeOnLedge: 2
+  ledgeDetectionLength: 0.2
+  ledgeSphereCastRadius: 0.3
   whatIsLedge:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   currLedge: {fileID: 0}
-  vaultDetectionLength: 0
+  vaultDetectionLength: 0.3
   topReached: 0
-  vaultClimbSpeed: 0
-  vaultJumpForwardForce: 0
-  vaultJumpUpForce: 0
-  vaultCooldown: 0
+  vaultClimbSpeed: 5
+  vaultJumpForwardForce: 7
+  vaultJumpUpForce: 6
+  vaultCooldown: 0.2
 --- !u!114 &2034653605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2178,8 +2178,8 @@ MonoBehaviour:
   minTimeOnLedge: 0.5
   holding: 0
   jumpKey: 32
-  ledgeJumpForwardForce: 7
-  ledgeJumpUpwardForce: 5
+  ledgeJumpForwardForce: 5
+  ledgeJumpUpwardForce: 4
   ledgeDetectionLength: 3
   ledgeSphereCastRadius: 0.5
   whatIsLedge:
