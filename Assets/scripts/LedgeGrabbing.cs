@@ -58,9 +58,23 @@ public class LedgeGrabbing : MonoBehaviour
 
             timeOnLedge += Time.deltaTime;
 
-            if (timeOnLedge > minTimeOnLedge && anyInputKeyPressed) ExitLedgeHold();
+            // Disable movement keys (W, A, S, D)
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
+                Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                rb.velocity = Vector3.zero; // Stop player movement
+                return; // Exit the method, preventing further movement
+            }
 
-            if (Input.GetKeyDown(jumpKey)) LedgeJump();
+            // Check for other input (space or mouse)
+            if (anyInputKeyPressed && (Input.GetKeyDown(jumpKey) || Input.GetMouseButtonDown(0)))
+            {
+                ExitLedgeHold(); // Exit ledge hold if other input is detected
+            }
+            else if (Input.GetKeyDown(jumpKey))
+            {
+                LedgeJump(); // Perform ledge jump if jump key is pressed
+            }
         }
 
         // Substate 2 - Exiting Ledge
@@ -120,15 +134,19 @@ public class LedgeGrabbing : MonoBehaviour
         float distanceToLedge = Vector3.Distance(transform.position, currLedge.position);
 
         // Move player towards ledge
-        if(distanceToLedge > 1f)
+        if (distanceToLedge > 1f)
         {
-            if(rb.velocity.magnitude < moveToLedgeSpeed)
+            if (rb.velocity.magnitude < moveToLedgeSpeed)
                 rb.AddForce(directionToLedge.normalized * moveToLedgeSpeed * 1000f * Time.deltaTime);
         }
 
         // Hold onto ledge
         else
         {
+            // Freeze player's movement
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
             if (!pm.freeze) pm.freeze = true;
             if (pm.unlimited) pm.unlimited = false;
         }
