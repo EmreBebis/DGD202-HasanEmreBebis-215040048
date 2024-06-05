@@ -5,6 +5,10 @@ using TMPro;
 
 public class PlayerMovementAdvanced : MonoBehaviour
 {
+    [Header("Jump Sound")]
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
+
     [Header("Movement")]
     private float moveSpeed;
     private float desiredMoveSpeed;
@@ -92,6 +96,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0; // 2D ses olarak ayarla
+        audioSource.playOnAwake = false;
+        audioSource.clip = jumpSound;
+
         climbingScriptDone = GetComponent<ClimbingDone>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -344,12 +353,18 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Jump()
     {
-        exitingSlope = true;
 
-        // reset y velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        {
+            exitingSlope = true;
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            // Zýplama sesini çal
+            audioSource.Play();
+
+            // reset y velocity
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
     }
     private void ResetJump()
     {
@@ -382,3 +397,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         return Mathf.Round(value * mult) / mult;
     }
 }
+
+
+
+
+

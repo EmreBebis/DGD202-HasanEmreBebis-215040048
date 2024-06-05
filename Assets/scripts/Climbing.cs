@@ -43,6 +43,18 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    [Header("Audio")]
+    public AudioClip climbingSound;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0; // 2D ses olarak ayarla
+        audioSource.playOnAwake = false;
+        audioSource.clip = climbingSound; // climbing sesi atamasý
+    }
+
     private void Update()
     {
         WallCheck();
@@ -103,14 +115,15 @@ public class Climbing : MonoBehaviour
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
 
-        /// idea - camera fov change
+        // climbing sesini çal
+        audioSource.Play();
     }
 
     private void ClimbingMovement()
     {
         rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
 
-        /// idea - sound effect
+       
     }
 
     private void StopClimbing()
@@ -118,8 +131,8 @@ public class Climbing : MonoBehaviour
         climbing = false;
         pm.climbing = false;
 
-        /// idea - particle effect
-        /// idea - sound effect
+        // climbing sesini durdur
+        audioSource.Stop();
     }
 
     private void ClimbJump()

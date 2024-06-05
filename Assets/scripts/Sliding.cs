@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Sliding : MonoBehaviour
 {
+    private AudioSource audioSource;
+    public AudioClip slidingSound;
+
     [Header("References")]
     public Transform orientation;
     public Transform playerObj;
@@ -30,6 +33,11 @@ public class Sliding : MonoBehaviour
         pm = GetComponent<PlayerMovementAdvanced>();
 
         startYScale = playerObj.localScale.y;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0; // 2D ses olarak ayarla
+        audioSource.playOnAwake = false;
+        audioSource.clip = slidingSound;
     }
 
     private void Update()
@@ -58,6 +66,7 @@ public class Sliding : MonoBehaviour
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
+        audioSource.Play();
     }
 
     private void SlidingMovement()
@@ -87,5 +96,8 @@ public class Sliding : MonoBehaviour
         pm.sliding = false;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
+
+        audioSource.Stop();
+
     }
 }

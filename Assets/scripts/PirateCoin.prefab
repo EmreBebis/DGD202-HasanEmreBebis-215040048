@@ -123,6 +123,7 @@ MonoBehaviour:
   item:
     name: Coin
     count: 1
+  pickupSound: {fileID: 8300000, guid: 098fd4a55ff0ba04b8bf94c602ae49b5, type: 3}
 --- !u!65 &-7093401537283290001
 BoxCollider:
   m_ObjectHideFlags: 0
